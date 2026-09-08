@@ -21,7 +21,7 @@ const posterImg = await getImage({
 			</p>
 			<div class="btn-block">
 				<div>
-					<a id="Products_TA_GetADemo1" href="/products/trendz/request-demo/" class="btn-accent" data-trendz-open-modal
+					<a id="Products_TA_GetADemo1" class="btn-accent" data-trendz-open-modal
 						>Talk to an Expert</a
 					>
 				</div>
@@ -123,6 +123,10 @@ const posterImg = await getImage({
 				text-align: initial;
 				flex: 1;
 				z-index: 1;
+				
+				a {
+					cursor: pointer;
+				}
 
 				:global(.trendz-chip) {
 					display: flex;

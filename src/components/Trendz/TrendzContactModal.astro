@@ -27,39 +27,41 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 
 		<form id="TrendzContactUs" class="tcm-form" action={FORMSPREE_CONTACT} method="post" novalidate>
 			<div class="tcm-body">
-				<div class="tcm-field tcm-field--full">
-					<label class="tcm-label" for="tcm-name">Name</label>
-					<input
-						class="tcm-input"
-						type="text"
-						id="tcm-name"
-						name="name"
-						placeholder="John Doe"
-						maxlength="50"
-						aria-invalid="false"
-					/>
-				</div>
-				<div class="tcm-field tcm-field--full">
-					<label class="tcm-label" for="tcm-email">Email Address</label>
-					<input
-						class="tcm-input"
-						type="email"
-						id="tcm-email"
-						name="email"
-						placeholder="john@example.com"
-						maxlength="80"
-						aria-invalid="false"
-					/>
-				</div>
-				<div class="tcm-field tcm-field--full">
-					<label class="tcm-label" for="tcm-message">Message</label>
-					<textarea
-						class="tcm-input tcm-textarea"
-						id="tcm-message"
-						name="message"
-						placeholder="Type your message here"
-						maxlength="800"
-						aria-invalid="false"></textarea>
+				<div class="tcm-fields">
+					<div class="tcm-field">
+						<label class="tcm-label" for="tcm-name">Name</label>
+						<input
+							class="tcm-input"
+							type="text"
+							id="tcm-name"
+							name="name"
+							placeholder="John Doe"
+							maxlength="50"
+							aria-invalid="false"
+						/>
+					</div>
+					<div class="tcm-field">
+						<label class="tcm-label" for="tcm-email">Email Address</label>
+						<input
+							class="tcm-input"
+							type="email"
+							id="tcm-email"
+							name="email"
+							placeholder="john@example.com"
+							maxlength="80"
+							aria-invalid="false"
+						/>
+					</div>
+					<div class="tcm-field tcm-field--full">
+						<label class="tcm-label" for="tcm-message">Message</label>
+						<textarea
+							class="tcm-input tcm-textarea"
+							id="tcm-message"
+							name="message"
+							placeholder="Type your message here"
+							maxlength="800"
+							aria-invalid="false"></textarea>
+					</div>
 				</div>
 
 				<input type="hidden" name="utm_source" id="tcm-utm_source" />
@@ -95,8 +97,8 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 		if (!overlay) return [];
 		return Array.from(
 			overlay.querySelectorAll<HTMLElement>(
-				'button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-			),
+				'button:not([disabled]), input:not([disabled]):not([type="hidden"]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+			)
 		).filter((el) => !el.closest('.tcm-hp-container'));
 	}
 
@@ -105,7 +107,6 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 		openerEl = document.activeElement as HTMLElement;
 		overlay.removeAttribute('hidden');
 		overlay.setAttribute('aria-hidden', 'false');
-		document.body.style.overflow = 'hidden';
 
 		const hpInput = overlay.querySelector<HTMLInputElement>('.tcm-hp-container input');
 		const hpLabel = overlay.querySelector<HTMLLabelElement>('.tcm-hp-container label');
@@ -297,12 +298,10 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 </script>
 
 <style lang="scss">
-	@use '../../styles/variables' as *;
-
 	.tcm-overlay {
 		position: fixed;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.5);
+		background: rgba(0, 0, 0, 0.4);
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -317,78 +316,92 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 
 	.tcm-card {
 		position: relative;
-		width: 100%;
-		max-width: 860px;
-		max-height: 90vh;
+		width: 861px;
+		max-width: 90%;
+		max-height: 90%;
 		display: flex;
 		flex-direction: column;
 		overflow: hidden;
-		background: var(--color-bg-surface);
+		background-color: #fefefe;
+		border: 1px solid #888;
 		border-radius: 24px;
-		box-shadow: var(--shadow-xl);
+		animation: animatetop 0.4s;
+		padding: 30px;
+	}
+
+	@keyframes animatetop {
+		from {
+			top: -300px;
+			opacity: 0;
+		}
+		to {
+			top: 0;
+			opacity: 1;
+		}
 	}
 
 	// ── Header ────────────────────────────────────────────────────────────────
 
 	.tcm-header {
+		position: sticky;
+		top: 0;
+		background: #fefefe;
+		z-index: 1;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 24px 30px 20px;
 		flex-shrink: 0;
-		border-bottom: 1px solid var(--color-border-light);
+		margin-bottom: 8px;
 	}
 
 	.tcm-title {
-		font-size: 28px;
-		font-weight: 600;
-		color: var(--color-text);
-		margin: 0;
+		font-size: 24px;
+		font-weight: 500;
+		white-space: normal;
+		padding: 0;
 	}
 
 	.tcm-close {
+		cursor: pointer;
+		padding: 4px;
+		background: transparent;
+		border: none;
+		color: inherit;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 36px;
-		height: 36px;
-		border: 1px solid var(--color-border);
-		border-radius: 50%;
-		background: transparent;
-		color: var(--color-text);
-		cursor: pointer;
-		transition: background 0.2s;
 		flex-shrink: 0;
-
-		&:hover {
-			background: var(--color-bg-light);
-		}
 	}
 
 	// ── Scrollable body ───────────────────────────────────────────────────────
 
 	.tcm-form {
+		height: 100%;
 		display: flex;
 		flex-direction: column;
 		flex: 1;
 		min-height: 0;
-		overflow: hidden;
+		overflow: auto;
 	}
 
 	.tcm-body {
 		flex: 1;
 		overflow-y: auto;
 		min-height: 0;
-		padding: 24px 30px;
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
+		padding: 20px 0;
+		overflow-x: hidden;
 	}
 
 	// ── Fields ────────────────────────────────────────────────────────────────
 
+	.tcm-fields {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 16px;
+	}
+
 	.tcm-field {
-		flex: 1;
+		width: calc(50% - 8px);
 
 		&--full {
 			width: 100%;
@@ -397,37 +410,43 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 
 	.tcm-label {
 		display: block;
-		font-size: 13px;
+		font-size: 14px;
 		font-weight: 500;
-		color: var(--color-text-secondary);
+		color: #3d3d3d;
 		margin-bottom: 6px;
 	}
 
 	.tcm-input {
 		width: 100%;
-		font-size: 15px;
-		line-height: 1.5;
-		border: 1px solid var(--color-border-light);
+		font-size: 16px;
+		line-height: 30px;
+		border: 1px solid #e0e1e2;
 		border-radius: 6px;
-		background: transparent;
-		color: var(--color-text);
+		background-color: transparent;
+		color: #212529;
 		box-sizing: border-box;
-		transition: border 0.2s;
+		box-shadow: none;
 
 		&::placeholder {
-			color: var(--color-text-muted);
+			color: #9e9e9e;
 		}
 
 		&:focus {
 			outline: none;
-			border-color: var(--color-primary);
-			box-shadow: 0 0 0 1px var(--color-primary);
+			border-color: #2a7dec;
+			box-shadow: 0 0 0 1px #2a7dec;
+			color: #212529;
+
+			&::placeholder {
+				opacity: 0.2;
+			}
 		}
 
 		&.invalid-input {
-			border-color: #d9534f;
+			border: 1px solid #d9534f;
 
 			&:focus {
+				border-color: #d9534f;
 				box-shadow: 0 0 0 0.2rem rgba(217, 83, 79, 0.25);
 			}
 		}
@@ -435,44 +454,63 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 
 	input.tcm-input {
 		height: 44px;
-		padding: 0 14px;
+		padding: 0 16px;
 	}
 
 	.tcm-textarea {
+		height: 170px;
 		resize: vertical;
-		padding: 10px 14px;
-		min-height: 110px;
+		padding: 8px 16px;
 	}
 
-	.tcm-error {
+	:global(.tcm-error) {
 		color: #d9534f;
-		font-size: 13px;
-		margin: 4px 0 0;
+		font-size: 14px;
+		font-weight: 400;
+		margin-bottom: 0;
+		width: 100%;
+		display: block;
+		box-sizing: border-box;
 	}
 
 	// ── Sticky footer ─────────────────────────────────────────────────────────
 
 	.tcm-footer {
-		padding: 16px 30px 20px;
-		border-top: 1px solid var(--color-border-light);
-		background: var(--color-bg-surface);
 		flex-shrink: 0;
+		padding-top: 20px;
+		background: #fefefe;
+		position: sticky;
+		bottom: 0;
+		z-index: 1;
+		margin-top: auto;
 	}
 
 	.tcm-submit-btn {
 		width: 100%;
-		height: 46px;
-		background: var(--color-primary);
-		color: var(--sl-color-text-invert);
-		font-size: 16px;
-		font-weight: 500;
-		border: none;
+		height: 56px;
+		font-size: 20px;
+		text-align: center;
+		line-height: 1;
+		padding: 0;
+		background-color: #3d50f5;
+		color: #fff;
+		border: 1px solid #3d50f5;
 		border-radius: 6px;
+		font-weight: 600;
 		cursor: pointer;
-		transition: background 0.2s;
+		transition:
+			background-color 0.15s,
+			color 0.15s;
 
 		&:hover {
-			background: var(--color-primary-hover);
+			background-color: #fff;
+			color: #3d50f5;
+		}
+	}
+
+	@media (max-width: 959px) {
+		.tcm-field {
+			width: 100%;
 		}
 	}
 </style>

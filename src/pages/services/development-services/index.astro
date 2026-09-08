@@ -2605,8 +2605,8 @@ const customerLogos = [
 		padding: 15px;
 		border-radius: 6px;
 		color: #fff;
-		background-color: #2a7dec;
-		border: 1px solid #2a7dec;
+		background-color: #3d50f5;
+		border: 1px solid #3d50f5;
 		font-weight: 600;
 		text-align: center;
 		text-decoration: none;
@@ -2617,14 +2617,14 @@ const customerLogos = [
 
 		&:hover {
 			background-color: #fff;
-			color: #2a7dec;
+			color: #3d50f5;
 			// `.cdu-button` is always rendered with class="cdu-button button …",
 			// so the global `:where(.button):hover` filter would otherwise
 			// blend over this background. Cancel it explicitly and add the
 			// border that the default `.cdu-button` state also has so the
 			// box dimensions don't shift on hover.
 			filter: none;
-			border: 1px solid #2a7dec;
+			border: 1px solid #3d50f5;
 		}
 	}
 
@@ -6095,6 +6095,7 @@ const customerLogos = [
 				overflow-y: auto;
 				min-height: 0;
 				padding: 20px 0;
+				overflow-x: hidden;
 			}
 
 			.dev-modal-submit-container {
