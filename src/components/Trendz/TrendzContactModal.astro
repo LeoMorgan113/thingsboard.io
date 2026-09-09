@@ -89,6 +89,9 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 </div>
 
 <script>
+	import { lockScroll, unlockScroll } from '@util/scroll-lock';
+	import { portalToBody } from '@util/portal-to-body';
+
 	const overlay = document.getElementById('trendz-contact-modal') as HTMLElement | null;
 
 	let openerEl: HTMLElement | null = null;
@@ -105,8 +108,11 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 	function openModal() {
 		if (!overlay) return;
 		openerEl = document.activeElement as HTMLElement;
+		// Portal before unhiding so the overlay never paints inside `.main-pane`.
+		portalToBody(overlay);
 		overlay.removeAttribute('hidden');
 		overlay.setAttribute('aria-hidden', 'false');
+		lockScroll();
 
 		const hpInput = overlay.querySelector<HTMLInputElement>('.tcm-hp-container input');
 		const hpLabel = overlay.querySelector<HTMLLabelElement>('.tcm-hp-container label');
@@ -118,14 +124,14 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 		}
 
 		const focusable = getFocusable();
-		(focusable[0] ?? overlay.querySelector<HTMLElement>('.tcm-close'))?.focus();
+    (focusable[0] ?? overlay.querySelector<HTMLElement>('.tcm-close'))?.focus();
 	}
 
 	function closeModal() {
 		if (!overlay) return;
 		overlay.setAttribute('hidden', '');
 		overlay.setAttribute('aria-hidden', 'true');
-		document.body.style.overflow = '';
+		unlockScroll();
 		openerEl?.focus();
 		openerEl = null;
 	}

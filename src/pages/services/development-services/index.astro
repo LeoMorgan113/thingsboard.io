@@ -2030,6 +2030,9 @@ const customerLogos = [
 </div>
 
 <script>
+	import { lockScroll, unlockScroll } from '@util/scroll-lock';
+	import { portalToBody } from '@util/portal-to-body';
+
 	const isMobile = window.innerWidth <= 1279;
 
 	const clientData = [
@@ -2391,23 +2394,28 @@ const customerLogos = [
 
 	// ── Contact Us Modal ──────────────────────────────────────────────────────
 	const devModal = document.getElementById('devServicesModal') as HTMLElement;
+	function closeDevModal() {
+		devModal.style.display = 'none';
+		unlockScroll();
+	}
+
 	if (devModal) {
 		devModal.addEventListener('click', (e) => {
-			if (e.target === devModal) devModal.style.display = 'none';
+			if (e.target === devModal) closeDevModal();
 		});
 
 		const closeBtn = devModal.querySelector<HTMLElement>('.dev-modal-close-button');
 		if (closeBtn)
-			closeBtn.addEventListener('click', () => {
-				devModal.style.display = 'none';
-			});
+			closeBtn.addEventListener('click', closeDevModal);
 	}
 
 	(window as any).onContactUsClick = function () {
 		if (!devModal) return;
 		const timeInput = devModal.querySelector<HTMLInputElement>('.form-rendered-at');
 		if (timeInput) timeInput.value = String(Math.floor(Date.now() / 1000));
+		portalToBody(devModal);
 		devModal.style.display = 'flex';
+		lockScroll();
 	};
 
 	// ── UTM + input--empty + honeypot init ───────────────────────────────────
