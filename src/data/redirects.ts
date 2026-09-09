@@ -1370,8 +1370,7 @@ export const NON_DOCS_REDIRECTS: Record<string, string> = {
 	'/blog/tbmq-2-3-external-authentication-bulk-provisioning-and-enterprise-audit-trails/': `${TBMQ_ORIGIN}/blog/tbmq-2-3-external-authentication-bulk-provisioning-and-enterprise-audit-trails/`,
 
 	// Trendz
-	'/products/trendz/trndz-request-demo/': '/products/trendz/request-demo/',
-	'/images/trendz/trndz-request-demo/': '/products/trendz/request-demo/',
+	'/products/trendz/request-demo/': '/products/trendz/',
 
 	// PaaS
 	'/products/paas/billing-info/': '/docs/paas/user-guide/billing-info/',
