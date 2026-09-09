@@ -124,7 +124,7 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 		}
 
 		const focusable = getFocusable();
-    (focusable[0] ?? overlay.querySelector<HTMLElement>('.tcm-close'))?.focus();
+		(focusable[0] ?? overlay.querySelector<HTMLElement>('.tcm-close'))?.focus();
 	}
 
 	function closeModal() {
@@ -363,7 +363,6 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 	// ── Scrollable body ───────────────────────────────────────────────────────
 
 	.tcm-form {
-		height: 100%;
 		display: flex;
 		flex-direction: column;
 		flex: 1;
@@ -396,9 +395,7 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 	.tcm-label {
 		@include trendz-body-xs-medium;
 		display: block;
-		font-size: 14px;
-		font-weight: 500;
-		color: #3d3d3d;
+		color: var(--color-trendz-text-secondary);
 		margin-bottom: 6px;
 	}
 
@@ -456,7 +453,7 @@ import { FORMSPREE_CONTACT } from '~/data/formspree';
 		box-sizing: border-box;
 	}
 
-	// ── Sticky footer ─────────────────────────────────────────────────────────
+	// ── Footer ────────────────────────────────────────────────────────────────
 
 	.tcm-footer {
 		flex-shrink: 0;

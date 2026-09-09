@@ -3,7 +3,9 @@
 @use 'variables' as *;
 
 // Compositor-friendly slide-in (transform + opacity only — no layout triggers).
-@keyframes animatetop {
+// Astro does not scope `@keyframes` names, so this one is global to every page
+// that `@use`s this partial — hence the namespaced name.
+@keyframes form-modal-slide-in {
 	from {
 		transform: translateY(-300px);
 		opacity: 0;
@@ -27,7 +29,7 @@
 	border: 1px solid var(--color-border);
 	border-radius: $radius-2xl;
 	padding: 30px;
-	animation: animatetop 0.4s;
+	animation: form-modal-slide-in 0.4s;
 
 	@media (prefers-reduced-motion: reduce) {
 		animation: none;
